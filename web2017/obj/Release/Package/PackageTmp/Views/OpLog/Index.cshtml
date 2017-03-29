@@ -1,0 +1,75 @@
+﻿@model PagedList.StaticPagedList<yynet.model.TB_OP_LOG>
+@using PagedList
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_for_admin.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        操作日志列表
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">操作日志列表</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().OP_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().OP_USER_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().OPER_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().OPER_IP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().OPER_TIME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().OPER_DESC)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OP_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OP_USER_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OPER_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OPER_IP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OPER_TIME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OPER_DESC)
+                </td>           
+            </tr>
+        }
+        <tr>
+            <td colspan="6">
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }))
+            </td>
+        </tr>
+    </table>
+
+</section>

@@ -1,0 +1,11 @@
+C:\work\web2017\dao_mysql\obj\Debug\dao_mysql.csprojResolveAssemblyReference.cache
+C:\work\web2017\dao_mysql\bin\Debug\dao_mysql.dll
+C:\work\web2017\dao_mysql\bin\Debug\dao_mysql.pdb
+C:\work\web2017\dao_mysql\bin\Debug\Dapper.dll
+C:\work\web2017\dao_mysql\bin\Debug\YYNET_MODEL.dll
+C:\work\web2017\dao_mysql\bin\Debug\YYNET_MODEL.pdb
+C:\work\web2017\dao_mysql\bin\Debug\Dapper.xml
+C:\work\web2017\dao_mysql\obj\Debug\dao_mysql.dll
+C:\work\web2017\dao_mysql\obj\Debug\dao_mysql.pdb
+C:\work\web2017\dao_mysql\bin\Debug\dao_mysql.dll.config
+C:\work\web2017\dao_mysql\bin\Debug\MySql.Data.dll

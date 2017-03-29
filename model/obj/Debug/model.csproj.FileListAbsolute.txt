@@ -1,0 +1,10 @@
+C:\work\web2017\model\bin\Debug\YYNET_MODEL.dll
+C:\work\web2017\model\bin\Debug\YYNET_MODEL.pdb
+C:\work\web2017\model\obj\Debug\YYNET_MODEL.dll
+C:\work\web2017\model\obj\Debug\YYNET_MODEL.pdb
+C:\work\web2017\model\obj\Debug\model.csprojResolveAssemblyReference.cache
+C:\Users\xydong\Downloads\web2017\model\bin\Debug\YYNET_MODEL.dll
+C:\Users\xydong\Downloads\web2017\model\bin\Debug\YYNET_MODEL.pdb
+C:\Users\xydong\Downloads\web2017\model\obj\Debug\model.csprojResolveAssemblyReference.cache
+C:\Users\xydong\Downloads\web2017\model\obj\Debug\YYNET_MODEL.dll
+C:\Users\xydong\Downloads\web2017\model\obj\Debug\YYNET_MODEL.pdb

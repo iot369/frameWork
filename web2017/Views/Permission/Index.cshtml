@@ -1,0 +1,70 @@
+﻿@model PagedList.StaticPagedList<yynet.model.TB_PERMISSION>
+@using PagedList
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "PermissionList";
+    Layout = "~/Views/Shared/_Layout_for_admin.cshtml";
+}
+
+  <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        权限列表
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">权限列表</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <p>
+        @Html.ActionLink("添加权限", "Create")
+    </p> 
+    <p style="color:red;">
+        @ViewBag.ErrMsg
+    </p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PERMISSION_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PERMISSION_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PARENT_PERMISSION_ID)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PERMISSION_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PERMISSION_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PARENT_PERMISSION_ID)
+                </td>
+                <td>
+                    @Html.ActionLink("编辑", "Edit", new { PERMISSION_ID = item.PERMISSION_ID }) |
+                    @Html.ActionLink("详细", "Details", new { PERMISSION_ID = item.PERMISSION_ID }) |
+                    @Html.ActionLink("删除", "Delete", new { PERMISSION_ID = item.PERMISSION_ID },
+                    new { onclick = "return confirm('确定要删除此项吗?');" })
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="4">
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }))
+            </td>
+        </tr>
+    </table>
+    </section>

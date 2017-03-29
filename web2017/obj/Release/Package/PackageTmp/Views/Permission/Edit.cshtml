@@ -1,0 +1,64 @@
+﻿@model yynet.model.TB_PERMISSION
+
+@{
+    ViewBag.Title = "PermissionEdit";
+    Layout = "~/Views/Shared/_Layout_for_admin.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        编辑权限
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">编辑权限</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    @using (Html.BeginForm("EditSave", "Permission"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.PERMISSION_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PERMISSION_ID, new { htmlAttributes = new { @class = "form-control",@readonly="true" } })
+                    @Html.ValidationMessageFor(model => model.PERMISSION_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PERMISSION_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PERMISSION_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PERMISSION_NAME, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PARENT_PERMISSION_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("PARENT_PERMISSION_ID");
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value=" 提 交 " class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div style="margin-left:50px;">
+        @Html.ActionLink("返回到列表", "Index")
+    </div>
+
+</section>

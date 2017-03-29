@@ -1,0 +1,93 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html class="bg-black">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    @Styles.Render("~/Content/login_style")
+
+</head>
+<body class="bg-black">
+    <div class="form-box" id="login-box">
+        <div class="header"> 登 录 </div>
+        
+            @using (Html.BeginForm("Login", "Login"))
+            {
+            
+            <div class="body bg-gray">
+                <div class="form-group">
+                    @Html.TextBox("userid",ViewData["last_user_id"],new { @class="form-control", @placeholder="用户名"})
+                    
+                </div>
+                <div class="form-group">
+                    @Html.Password("password",null,new {@class="form-control" ,@placeholder="密码" })
+                </div>
+                <div class="form-group">
+                    @Html.Raw("<input type=\"checkbox\" id=\"remember_me\" name=\"remember_me\" value=\"remember_me\"  "
+                   + ViewData["remember_me_checked"]+ " />")
+                  <input type="hidden" id="hid_remember_me" name="hid_remember_me" value='@ViewData["remember_me"]' />
+                       <span style="padding-left:8px; padding-top:8px; ">记 住 我</span>
+                    <span style="color:red;">@ViewData["errMsg_user"]</span>
+                </div>
+            </div>
+            <div class="footer">
+                <button type="submit" class="btn bg-olive btn-block"> 登 录 </button>
+                <div class="hidden">
+                    <p><a href="#">I forgot my password</a></p>
+
+                    <a href="register.html" class="text-center">Register a new membership</a>
+                </div>
+            </div>
+            }
+
+        <div class="margin text-center hidden">
+            <span>Sign in using social networks</span>
+            <br />
+            <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button>
+            <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button>
+            <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
+
+        </div>
+    </div>
+
+
+    
+    <!-- jQuery -->
+    @Scripts.Render("~/bundles/jquery")
+    <!-- Bootstrap -->
+    @Scripts.Render("~/bundles/bootstrap")
+       
+    @Scripts.Render("~/bundles/app")
+
+    
+    
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#remember_me').on('ifChecked', function (event) {            
+            $('#hid_remember_me').val('remember_me');
+        });
+        $('#remember_me').on('ifUnchecked', function (event) {
+            $('#hid_remember_me').val('');
+        });    
+    });
+
+    //function change_rem() {
+    //    alert(1);
+    //    $('#remember_me').on('ifChecked', function (event) {
+    //        $('#hid_remember_me').val('remember_me');
+    //        alert($('#hid_remember_me').val());
+    //    });
+    //    $('#remember_me').on('ifUnchecked', function (event) {
+    //        $('#hid_remember_me').val('');
+    //        alert($('#hid_remember_me').val());
+    //    });
+    //}
+
+    </script>  
+</body>
+</html>

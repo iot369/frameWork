@@ -1,0 +1,200 @@
+﻿@using yynet.model;
+
+@{
+    ViewBag.Title = "编辑用户";
+    Layout = "~/Views/Shared/_Layout_for_admin.cshtml";
+}
+@section head1{
+    <link href="~/Content/uploadify/uploadify.css" rel="stylesheet" />
+}
+<section class="content-header">
+    <h1>
+        编辑用户
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">编辑用户</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @{
+        TB_USER user = (TB_USER)ViewData["user"];
+        Dictionary<string, bool> check_state_list = (Dictionary<string, bool>)ViewData["check_state"];
+    }
+
+    @using (Html.BeginForm("EditSave", "User"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+         
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => user.USER_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => user.USER_ID, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                    @Html.ValidationMessageFor(model => user.USER_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.OLD_PASSWORD, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => user.OLD_PASSWORD, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => user.OLD_PASSWORD, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.NEW_PASSWORD, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => user.NEW_PASSWORD, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => user.NEW_PASSWORD, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.RE_PASSWORD, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => user.RE_PASSWORD, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => user.RE_PASSWORD, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.REAL_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => user.REAL_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => user.REAL_NAME, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.SEX, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("sex")
+                    @Html.ValidationMessageFor(model => user.SEX, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => user.TITLE, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => user.TITLE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => user.TITLE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => user.USER_IMAGE, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div id="fileQueue">
+                    </div>
+                    <input type="file" id="file_upload" name="file_upload" />
+                    <img src="/Uploads/@user.USER_IMAGE_PATH" id="img_user" name="img_user" />                    
+                        <input type="hidden" id="image_file" name="image_file" value="@user.USER_IMAGE_PATH" />
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.EMAIL, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => user.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => user.EMAIL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.ACCOUNT_STATUS, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("account_status")
+                    @Html.ValidationMessageFor(model => user.ACCOUNT_STATUS, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">角色</div>
+                <div class="col-md-10">
+                    @{
+                        IEnumerable<TB_ROLE> list = user.ROLE_LIST;
+                    }
+
+                    @foreach (var p in list)
+                    {
+
+                        @Html.Raw("<span style='margin-left:15px;margin-right:5px;white-space:nowrap;'>")
+                        if (check_state_list[p.ROLE_ID] == true)
+                        {
+                            @Html.Raw(" <input type='checkbox' name='role' value='" + p.ROLE_ID + "' checked='checked' id='i_" + p.ROLE_ID + "' />")
+                        }
+                        else
+                        {
+                            @Html.Raw(" <input type='checkbox' name='role' value='" + p.ROLE_ID + "' id='i_" + p.ROLE_ID + "'   />")
+                        }
+                        @Html.Raw("")
+                        @p.ROLE_NAME
+                        @Html.Raw("</span>")
+
+                    }
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value=" 提 交 " class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+                        }
+
+    <div>
+        @Html.ActionLink("返回列表", "Index")
+    </div>
+</section>
+@section scripts{
+    
+    <script src="~/Content/uploadify/jquery.uploadify-3.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#file_upload").uploadify({
+                //指定swf文件
+                'swf': '@Url.Content("~/Content/uploadify/uploadify.swf")',
+                //后台处理的页面
+                'uploader': '/Uploadify/Upload',
+                //按钮显示的文字
+                'buttonText': '上传图片',
+                //显示的高度和宽度，默认 height 30；width 120
+                //'height': 15,
+                //'width': 80,
+                //上传文件的类型  默认为所有文件    'All Files'  ;  '*.*'
+                //在浏览窗口底部的文件类型下拉菜单中显示的文本
+                'fileTypeDesc': 'Image Files',
+                //允许上传的文件后缀
+                'fileTypeExts': '*.gif; *.jpg; *.png',
+                //发送给后台的其他参数通过formData指定
+                //'formData': { 'someKey': 'someValue', 'someOtherKey': 1 },
+                //上传文件页面中，你想要用来作为文件队列的元素的id, 默认为false  自动生成,  不带#
+                //'queueID': 'fileQueue',
+                //选择文件后自动上传
+                'auto': true,
+                //设置为true将允许多文件上传
+                'multi': true,
+                //上传完成后执行
+               'onUploadSuccess': function (file, data, response) {
+                var a = jQuery.parseJSON(data);
+                if (a.Success) {
+                    $('#image_file').val(a.SaveName);
+                    $('#img_user').attr('src', '/Uploads/'+a.SaveName);
+                }
+                else {
+                    alert("上传异常：" + a.Message);
+                    //$.dialog.alert("上传异常：" + a.Message);
+                }
+            }
+            });
+        });
+    </script>
+}

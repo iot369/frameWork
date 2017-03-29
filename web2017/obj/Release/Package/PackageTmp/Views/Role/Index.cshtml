@@ -1,0 +1,64 @@
+﻿@model PagedList.StaticPagedList<yynet.model.TB_ROLE>
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_for_admin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        角色列表
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">角色列表</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <p>
+        @Html.ActionLink("创建角色", "Create")
+    </p>
+    <p style="color:red;">
+        @ViewBag.ErrMsg
+    </p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ROLE_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ROLE_NAME)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ROLE_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ROLE_NAME)
+                </td>
+                <td>
+                    @Html.ActionLink("编辑", "Edit", new { ROLE_ID = item.ROLE_ID }) |
+                    @Html.ActionLink("详细", "Details", new { ROLE_ID = item.ROLE_ID }) |
+                    @Html.ActionLink("删除", "Delete", new { ROLE_ID = item.ROLE_ID }, 
+                   new { onclick = "return confirm('确定要删除此项吗?');" })
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td colspan="4">
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }))
+            </td>
+        </tr>
+    </table>
+</section>

@@ -1,0 +1,63 @@
+﻿@model yynet.model.TB_PERMISSION
+
+@{
+    ViewBag.Title = "PermissionDetail";
+    Layout = "~/Views/Shared/_Layout_for_admin.cshtml";
+}
+<style>
+    dt {
+         line-height:35px;
+    }
+    dd {
+        line-height: 35px;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        权限详细
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">权限详细</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <div>
+        
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PERMISSION_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PERMISSION_ID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PERMISSION_NAME)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PERMISSION_NAME)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PARENT_PERMISSION_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PARENT_PERMISSION_ID)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink(" 编 辑 ", "Edit", new { PERMISSION_ID = Model.PERMISSION_ID }) |
+        @Html.ActionLink(" 返 回 列 表 ", "Index")
+    </p>
+
+</section>

@@ -1,0 +1,108 @@
+﻿@model PagedList.StaticPagedList<yynet.model.TB_USER>
+@using PagedList
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_for_admin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        用户列表
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">用户列表</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <p>
+        @Html.ActionLink("创建用户", "Create")
+    </p>
+    <p style="color:red;">
+        @ViewBag.ErrMsg
+    </p>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().USER_ID)
+            </th>        
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().REAL_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().TITLE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().USER_IMAGE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().SEX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().EMAIL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ACCOUNT_STATUS)
+            </th>
+            <th>操作</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USER_ID)
+                </td>
+            
+                <td>
+                    @Html.DisplayFor(modelItem => item.REAL_NAME)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TITLE)
+                </td>
+
+                <td>
+                    @Html.Raw("<img src='/Uploads/"+item.USER_IMAGE_PATH + "' />")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SEX)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMAIL)
+                </td>
+                <td>@{ 
+                    if (item.ACCOUNT_STATUS == "Y")
+                    {
+                        @Html.Raw("启用");
+                    } else
+                    {
+                        @Html.Raw("禁用");
+                    }
+                }
+                    
+                </td>
+                <td>
+                    @Html.ActionLink("编辑", "Edit", new { USER_ID = item.USER_ID }) |
+                    @Html.ActionLink("详细", "Details", new { USER_ID = item.USER_ID }) |
+                    @Html.ActionLink("删除", "Delete", new { USER_ID = item.USER_ID },
+                    new { onclick = "return confirm('确定要删除此项吗?');" })
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td colspan="6">
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }))
+            </td>
+        </tr>
+
+    </table>
+</section>

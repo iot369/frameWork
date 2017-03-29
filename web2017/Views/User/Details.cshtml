@@ -1,0 +1,123 @@
+﻿@using yynet.model;
+
+@{
+    ViewBag.Title = "用户明细";
+    Layout = "~/Views/Shared/_Layout_for_admin.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        用户详细
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">用户详细</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @{
+        TB_USER user = (TB_USER)ViewData["user"];
+        Dictionary<string, bool> check_state_list = (Dictionary<string, bool>)ViewData["check_state"];
+    }
+
+    @using (Html.BeginForm("EditSave", "User"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+         
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => user.USER_ID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "true" })
+                <div class="col-md-10" style="padding-top:7px;">                    
+                    @Html.Raw(user.USER_ID)
+                </div>
+            </div>     
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.REAL_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" style="padding-top:7px;">                    
+                    @Html.Raw(user.REAL_NAME)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.SEX, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" style="padding-top:7px;">                    
+                    @Html.Raw(user.SEX)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => user.TITLE, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" style="padding-top:7px;">
+                    @Html.Raw(user.TITLE)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => user.USER_IMAGE, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">                                     
+                    <img src="/Uploads/@user.USER_IMAGE_PATH" id="img_user" name="img_user" />                 
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.EMAIL, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" style="padding-top:7px;">                    
+                    @Html.Raw(user.EMAIL)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => user.ACCOUNT_STATUS, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10"  style="padding-top:7px;">                
+                    @{ 
+                        if (user.ACCOUNT_STATUS == "Y")
+                        {
+                            @Html.Raw("启用");
+                        } else
+                        {
+                            @Html.Raw("禁用");
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">角色</label>
+                <div class="col-md-10" style="padding-top:7px;">
+                    @{
+                        IEnumerable<TB_ROLE> list = user.ROLE_LIST;
+                    }
+
+                    @foreach (var p in list)
+                    {
+
+                        @Html.Raw("<span style='margin-right:5px;white-space:nowrap;'>")
+                        if (check_state_list[p.ROLE_ID] == true)
+                        {
+                            @Html.Raw(" <input type='checkbox' name='role' value='" + p.ROLE_ID + "' checked='checked' id='i_" + p.ROLE_ID + "' disabled='disabled' />")
+                        }
+                        else
+                        {
+                            @Html.Raw(" <input type='checkbox' name='role' value='" + p.ROLE_ID + "' id='i_" + p.ROLE_ID + "' disabled='disabled'  />")
+                        }
+                        @Html.Raw("&nbsp;")
+                        @p.ROLE_NAME
+                        @Html.Raw("</span>")
+
+                    }
+
+                </div>
+            </div>
+
+         
+        </div>
+                        }
+
+    <div>
+        @Html.ActionLink("返回列表", "Index")
+    </div>
+</section>

@@ -1,0 +1,5 @@
+C:\work\web2017\model\bin\Release\YYNET_MODEL.dll
+C:\work\web2017\model\bin\Release\YYNET_MODEL.pdb
+C:\work\web2017\model\obj\Release\model.csprojResolveAssemblyReference.cache
+C:\work\web2017\model\obj\Release\YYNET_MODEL.dll
+C:\work\web2017\model\obj\Release\YYNET_MODEL.pdb

@@ -1,0 +1,9 @@
+C:\work\web2017\dao_sql\bin\Release\YYNET_SQL.dll
+C:\work\web2017\dao_sql\bin\Release\YYNET_SQL.pdb
+C:\work\web2017\dao_sql\bin\Release\Dapper.dll
+C:\work\web2017\dao_sql\bin\Release\YYNET_MODEL.dll
+C:\work\web2017\dao_sql\bin\Release\YYNET_MODEL.pdb
+C:\work\web2017\dao_sql\bin\Release\Dapper.xml
+C:\work\web2017\dao_sql\obj\Release\dao_sql.csprojResolveAssemblyReference.cache
+C:\work\web2017\dao_sql\obj\Release\YYNET_SQL.dll
+C:\work\web2017\dao_sql\obj\Release\YYNET_SQL.pdb
